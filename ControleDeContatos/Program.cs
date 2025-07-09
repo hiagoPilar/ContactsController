@@ -1,4 +1,5 @@
 using ControleDeContatos.Data;
+using ControleDeContatos.Repositorio;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
@@ -17,7 +18,10 @@ namespace ControleDeContatos
             
 
             builder.Services.AddDbContext<BancoContext>
-                (options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))); 
+                (options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
+
+            builder.Services.AddScoped<IContatoRepositorio, ContatoRepositorio>();
+
 
             var app = builder.Build();
 
